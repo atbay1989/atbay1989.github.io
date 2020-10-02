@@ -1,0 +1,50 @@
+body {
+    font-family: 'Fredoka One', cursive;
+    font-size: 24px;
+    line-height: 1.5;
+    background-color: #ffe53b;
+    color: #000000;
+}
+
+header {
+    position: fixed;
+    top: 50px;
+    left: 50px;
+}
+
+h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+h1:hover {
+    color: #ff3b52;
+    transition: 0.3s;
+}
+
+a {
+    color: #000000;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ff3b52;
+    transition: 0.3s;
+}
+
+section {
+  height: 55vh;
+  background-color: #4284f5;
+}
+
+footer {
+    position: fixed;
+    bottom: 50px;
+    left: 50px;
+}
+
+footer a {
+    margin-right: 5px;
+}
