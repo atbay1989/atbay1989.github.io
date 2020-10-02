@@ -8,7 +8,7 @@ canvas.style.left = 0;
 canvas.style.zIndex = -10;
 canvas.style.backgroundColor = 'transparent';
 var ctx = canvas.getContext('2d');
-ctx.strokeStyle = globalRandomColor;
+ctx.strokeStyle = 'black';
 var lines = [];
 document.body.append(canvas);
 var increment = 47;
