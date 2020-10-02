@@ -6,6 +6,7 @@ let y = 0;
 //const canvas = canvas.getContext('2d');
 
 var canvas = document.createElement('canvas');
+canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 canvas.style.position = 'fixed';
