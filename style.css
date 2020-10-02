@@ -34,8 +34,8 @@ a:hover {
     transition: 0.3s;
 }
 
-section {
-  height: 55vh;
+canvas {
+  /* height: 55vh; */
   background-color: #4284f5;
 }
 
