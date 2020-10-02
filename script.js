@@ -1,12 +1,5 @@
-let draw = true;
-let x = 0;
-let y = 0;
-
-//const myPics = document.getElementById('canvas');
-//const canvas = canvas.getContext('2d');
-
+var square = window.innerWidth < window.innerHeight ? window.innerWidth : window.innerHeight;
 var canvas = document.createElement('canvas');
-canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 canvas.style.position = 'fixed';
@@ -14,37 +7,96 @@ canvas.style.top = 0;
 canvas.style.left = 0;
 canvas.style.zIndex = -10;
 canvas.style.backgroundColor = 'transparent';
-
-
-canvas.addEventListener('mousedown', e => {
-  x = e.offsetX;
-  y = e.offsetY;
-  draw = true;
-});
-
-canvas.addEventListener('mousemove', e => {
-  if (draw === true) {
-    drawLine(canvas, x, y, e.offsetX, e.offsetY);
-    x = e.offsetX;
-    y = e.offsetY;
-  }
-});
-
-window.addEventListener('mouseup', e => {
-  if (draw === true) {
-    drawLine(canvas, x, y, e.offsetX, e.offsetY);
-    x = 0;
-    y = 0;
-    draw = false;
-  }
-});
-
-function drawLine(canvas, x1, y1, x2, y2) {
-  canvas.beginPath();
-  canvas.strokeStyle = 'black';
-  canvas.lineWidth = 2;
-  canvas.moveTo(x1, y1);
-  canvas.lineTo(x2, y2);
-  canvas.stroke();
-  canvas.closePath();
+var ctx = canvas.getContext('2d');
+ctx.strokeStyle = globalRandomColor;
+var lines = [];
+document.body.append(canvas);
+var increment = 47;
+var started = false;
+canvas.onmousedown = function(e) {
+    if (!started) {
+        started = true;
+    }
+    increment = increment + 5;
+    draw(e);
+}
+canvas.onclick = function(e) {
+    moving(e);
+    draw;
+}
+var mousemoves = 0;
+window.onmousemove = function(e) {
+    setTimeout(function() {
+        moving(e);
+        draw(e);
+    }, 15)
+}
+canvas.ontouchmove = function(e) {
+    moving(e);
+    draw(e);
+}
+function moving(e) {
+    var ogStrokeStyle = globalRandomColor;
+    lines.forEach(function(line) {
+        if (ctx.isPointInStroke(line, e.clientX, e.clientY)) {
+            ctx.strokeStyle = 'black';
+        }
+        ctx.stroke(line);
+        ctx.strokeStyle = ogStrokeStyle;
+    })
+}
+function draw(e) {
+    if (e != undefined) {
+        startX = e.clientX;
+        startY = e.clientY;
+    } else {
+        startX = window.innerWidth / 2;
+        startY = window.innerHeight / 2;
+    }
+    lines = [];
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    for (var x = 0; x <= window.innerWidth; x = x + increment) {
+        var line = new Path2D();
+        line.moveTo(startX, startY);
+        line.lineTo(x, 0);
+        var dx = startX - x;
+        var dy = startY - 0;
+        line.length = Math.sqrt(dx * dx + dy * dy);
+        ctx.stroke(line);
+        lines.push(line);
+        var line2 = new Path2D();
+        line2.moveTo(startX, startY);
+        line2.lineTo(x, window.innerHeight);
+        var dx = startX - x;
+        var dy = startY - 0;
+        line2.length = Math.sqrt(dx * dx + dy * dy);
+        ctx.stroke(line2, 'evenodd');
+        lines.push(line2);
+    }
+    for (var y = increment; y < window.innerHeight; y = y + increment) {
+        var line = new Path2D();
+        line.moveTo(startX, startY);
+        line.lineTo(0, y);
+        var dx = startX - 0;
+        var dy = startY - y;
+        line.length = Math.sqrt(dx * dx + dy * dy);
+        ctx.stroke(line);
+        lines.push(line);
+        var line2 = new Path2D();
+        line2.moveTo(startX, startY);
+        line2.lineTo(window.innerWidth, y);
+        var dx = startX - 0;
+        var dy = startY - y;
+        line2.length = Math.sqrt(dx * dx + dy * dy);
+        ctx.stroke(line2);
+        lines.push(line2);
+    }
+}
+draw();
+var moireResizeTimeout = null;
+window.onresize = function(e) {
+    if (moireResizeTimeout != null) {}
+    moireResizeTimeout = setTimeout(function() {
+        draw();
+    }, 2000)
 }
