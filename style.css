@@ -2,7 +2,7 @@
 
 body {
     font-family: 'Gothic A1';
-    background-image: url("/static/images/motto.png");
+    background-image: url("motto.png");
     background-repeat: repeat;
 }
 
