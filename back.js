@@ -5,13 +5,13 @@ let y = 0;
 const myPics = document.getElementById('canvas');
 const context = canvas.getContext('2d');
 
-myPics.addEventListener('mousedown', e => {
+myPics.addEventListener('mousemove', e => {
   x = e.offsetX;
   y = e.offsetY;
   draw = true;
 });
 
-myPics.addEventListener('mousemove', e => {
+myPics.addEventListener('mousedown', e => {
   if (draw === true) {
     drawLine(context, x, y, e.offsetX, e.offsetY);
     x = e.offsetX;
