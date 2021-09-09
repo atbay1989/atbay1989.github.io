@@ -6,17 +6,9 @@ const myPics = document.getElementById('canvas');
 const context = canvas.getContext('2d');
 
 myPics.addEventListener('mousemove', e => {
+  drawLine(context, x, y, e.offsetX, e.offsetY);
   x = e.offsetX;
   y = e.offsetY;
-  draw = true;
-});
-
-myPics.addEventListener('mousedown', e => {
-  if (draw === true) {
-    drawLine(context, x, y, e.offsetX, e.offsetY);
-    x = e.offsetX;
-    y = e.offsetY;
-  }
 });
 
 window.addEventListener('mouseup', e => {
